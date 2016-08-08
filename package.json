@@ -1,0 +1,24 @@
+{
+  "name": "automint-licensing",
+  "version": "0.0.1",
+  "main": "server.js",
+  "description": "Node license server for Automint App",
+  "author": "Viral Kacha <vrl.kacha@gmail.com>",
+  "contributors": [
+    "Anand Kacha <ndkcha@gmail.com>"
+  ],
+  "repository": "vrlkacha/automint-licensing",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "cors": "^2.7.1",
+    "couchbase": "^2.2.1",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.6",
+    "moment": "^2.14.1",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^3.4.0"
+  }
+}
