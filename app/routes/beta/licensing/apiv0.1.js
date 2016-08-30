@@ -2,6 +2,7 @@ var https = require('https');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var couchbase = require('couchbase');
+const dataBucket = 'vrl-sgw-cloud';
 var cluster = new couchbase.Cluster('couchbase://cbs.server/');
 var bucketAutomintLicenses = cluster.openBucket('automint-licenses');
 var N1qlQuery = couchbase.N1qlQuery;
@@ -57,7 +58,7 @@ module.exports = function (app, express) {
             var password = req.body.password;
             options.method = 'GET';
             options.port = publicPort;
-            options.path = '/nd-sgw-cloud/_session';
+            options.path = '/'+ dataBucket + '/_session';
             options.auth = name + ':' + password;
             var req = https.request(options, (res) => {
                 var body = '';
