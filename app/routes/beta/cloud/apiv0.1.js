@@ -3,8 +3,8 @@ var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var couchbase = require('couchbase');
 const dataBucket = 'automint-sgw-cloud';
-var bucketAutomintCBSCloud = cluster.openBucket('automint-cbs-cloud');
 var cluster = new couchbase.Cluster('couchbase://cbs.server/');
+var bucketAutomintCBSCloud = cluster.openBucket('automint-cbs-cloud');
 var N1qlQuery = couchbase.N1qlQuery;
 
 var adminPort = 4985;
