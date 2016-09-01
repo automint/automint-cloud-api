@@ -6,10 +6,10 @@ export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
 case "$1" in
   start)
-  forever start --sourceDir=/home/ubuntu/automint/automint-cloud-api/server.js -p /home/ubuntu/automint/automint-cloud-api/forever server.js
+  forever start --sourceDir=/home/ubuntu/automint/automint-cloud-api/ -p /home/ubuntu/automint/automint-cloud-api/forever server.js
   ;;
 stop)
-  forever stop --sourceDir=/home/ubuntu/automint/automint-cloud-api/server.js script.js
+  forever stop --sourceDir=/home/ubuntu/automint/automint-cloud-api/ server.js
   ;;
 *)
   echo "Usage: /etc/init.d/automint-cloud-api {start|stop}"
