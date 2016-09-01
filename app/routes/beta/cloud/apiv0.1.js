@@ -2,8 +2,9 @@ var https = require('https');
 var moment = require('moment');
 var jwt = require('jsonwebtoken');
 var couchbase = require('couchbase');
+const dataBucket = 'automint-sgw-cloud';
+var bucketAutomintCBSCloud = cluster.openBucket('automint-cbs-cloud');
 var cluster = new couchbase.Cluster('couchbase://cbs.server/');
-var bucketAutomintCBSCloud = cluster.openBucket('vrl-cbs-cloud');
 var N1qlQuery = couchbase.N1qlQuery;
 
 var adminPort = 4985;
@@ -49,7 +50,7 @@ module.exports = function (app, express) {
             // GET Request on Public Port to verify Old Password:
             options.method = 'GET';
             options.port = publicPort;
-            options.path = '/automint-sgw-cloud/_session';
+            options.path = '/'+ dataBucket + '/_session';
             options.auth = name + ':' + oldpass;
             var req = https.request(options, (res) => {
                 var body = '';
@@ -67,7 +68,7 @@ module.exports = function (app, express) {
                     else {
                         // GET Request on Admin Port to fetch User details:
                         options.port = adminPort;
-                        options.path = '/automint-sgw-cloud/_user/' + name;
+                        options.path = '/' + dataBucket + '/_user/' + name;
                         options.method = 'GET';
                         var req = https.request(options, (res) => {
                             var body = '';
@@ -85,7 +86,7 @@ module.exports = function (app, express) {
                                     delete putData["name"];
                                     delete putData["all_channels"];
                                     options.port = adminPort;
-                                    options.path = '/automint-sgw-cloud/_user/' + name;
+                                    options.path = '/' + dataBucket + '/_user/' + name;
                                     options.method = 'PUT';
                                     options.headers = {
                                         'Content-Type': 'application/json'
@@ -94,7 +95,7 @@ module.exports = function (app, express) {
                                         // GET Request to Public Port to check that the password is changed:
                                         options.method = 'GET';
                                         options.port = publicPort;
-                                        options.path = '/automint-sgw-cloud/_session';
+                                        options.path = '/' + dataBucket + '/_session';
                                         options.auth = name + ':' + newpass;
                                         var req = https.request(options, (res) => {
                                             var body = '';
